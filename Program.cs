@@ -53,7 +53,7 @@ app.UseCors("AllowClient");
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
-app.UseSwaggerUI()
+app.UseSwaggerUI();
 
 app.UseMiddleware<ApiKeyMiddleware>();
 app.UseAuthorization();
