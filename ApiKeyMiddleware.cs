@@ -20,7 +20,7 @@
         }
 
         var apiKey = _config["ApiKey"];
-        if (!apiKey.Equals(extractedKey))
+        if (string.IsNullOrEmpty(apiKey) || !apiKey.Equals(extractedKey, StringComparison.Ordinal))
         {
             context.Response.StatusCode = 401;
             await context.Response.WriteAsync("API Key non valida.");
