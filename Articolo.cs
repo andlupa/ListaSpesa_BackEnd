@@ -23,11 +23,10 @@ public class Articolo
 
     public string? NomeNegozio { get; set; }   // <-- ora nullable
 
-    public bool OffertaSiNo { get; set; }
-
     [Column(TypeName = "decimal(10,2)")]
     public decimal? PrezzoOfferta { get; set; }
 
+    [Column(TypeName = "timestamp without time zone")]
     public DateTime? DataScadenzaOfferta { get; set; }
 
     // NUOVI CAMPI

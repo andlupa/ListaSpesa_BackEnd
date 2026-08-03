@@ -51,9 +51,16 @@ namespace ListaSpesa_BackEnd.Controllers
             if (nuovoArticolo.Priorita < -1 || nuovoArticolo.Priorita > 1)
                 return BadRequest("La priorità deve essere -1, 0 o 1.");
 
-            _context.Articoli.Add(nuovoArticolo);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetUno), new { id = nuovoArticolo.IdArticolo }, nuovoArticolo);
+            try
+            {
+                _context.Articoli.Add(nuovoArticolo);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction(nameof(GetUno), new { id = nuovoArticolo.IdArticolo }, nuovoArticolo);
+            }
+            catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("duplicate key") == true)
+            {
+                return Conflict("Esiste già un articolo con questo nome.");
+            }
         }
 
         // PUT /api/articoli/5
@@ -65,9 +72,16 @@ namespace ListaSpesa_BackEnd.Controllers
             if (articoloModificato.Priorita < -1 || articoloModificato.Priorita > 1)
                 return BadRequest("La priorità deve essere -1, 0 o 1.");
 
-            _context.Entry(articoloModificato).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return NoContent();
+            try
+            {
+                _context.Entry(articoloModificato).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("duplicate key") == true)
+            {
+                return Conflict("Esiste già un articolo con questo nome.");
+            }
         }
 
         // DELETE /api/articoli/5

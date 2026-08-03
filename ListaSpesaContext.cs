@@ -10,5 +10,12 @@ namespace ListaSpesa_BackEnd
 
         public DbSet<Categoria> Categorie { get; set; }
         public DbSet<Articolo> Articoli { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Articolo>()
+                .HasIndex(a => a.NomeArticolo)
+                .IsUnique();
+        }
     }
 }
