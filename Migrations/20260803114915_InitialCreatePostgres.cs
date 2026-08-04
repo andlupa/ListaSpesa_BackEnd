@@ -37,7 +37,6 @@ namespace ListaSpesa_BackEnd.Migrations
                     DaComprareSiNo = table.Column<bool>(type: "boolean", nullable: false),
                     Quantità = table.Column<int>(type: "integer", nullable: false),
                     NomeNegozio = table.Column<string>(type: "text", nullable: true),
-                    OffertaSiNo = table.Column<bool>(type: "boolean", nullable: false),
                     PrezzoOfferta = table.Column<decimal>(type: "numeric(10,2)", nullable: true),
                     DataScadenzaOfferta = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Priorita = table.Column<int>(type: "integer", nullable: false),
