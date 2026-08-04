@@ -17,8 +17,6 @@ public class Articolo
     [Column(TypeName = "decimal(10,2)")]
     public decimal PrezzoNormale { get; set; }
 
-    public bool OffertaSiNo { get; set; } = false;
-
     public bool DaComprareSiNo { get; set; }
 
     public int Quantità { get; set; }

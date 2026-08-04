@@ -56,8 +56,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseMiddleware<ApiKeyMiddleware>();
-app.UseAuthorization();
 
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
