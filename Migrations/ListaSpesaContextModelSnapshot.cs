@@ -3,8 +3,8 @@ using System;
 using ListaSpesa_BackEnd;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -17,34 +17,34 @@ namespace ListaSpesa_BackEnd.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("ProductVersion", "8.0.30")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Articolo", b =>
                 {
                     b.Property<int>("IdArticolo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdArticolo"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdArticolo"));
 
                     b.Property<bool>("DaComprareSiNo")
-                        .HasColumnType("boolean");
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("DataScadenzaOfferta")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("IdCategoria")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("NomeArticolo")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("NomeNegozio")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PrezzoNormale")
                         .HasColumnType("decimal(10,2)");
@@ -53,13 +53,13 @@ namespace ListaSpesa_BackEnd.Migrations
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("Priorita")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantità")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("UnitaMisura")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdArticolo");
 
@@ -75,13 +75,13 @@ namespace ListaSpesa_BackEnd.Migrations
                 {
                     b.Property<int>("IdCategoria")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdCategoria"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCategoria"));
 
                     b.Property<string>("NomeCategoria")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdCategoria");
 

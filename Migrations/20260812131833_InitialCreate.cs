@@ -1,13 +1,12 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace ListaSpesa_BackEnd.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreatePostgres : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,9 +15,9 @@ namespace ListaSpesa_BackEnd.Migrations
                 name: "Categorie",
                 columns: table => new
                 {
-                    IdCategoria = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NomeCategoria = table.Column<string>(type: "text", nullable: false)
+                    IdCategoria = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NomeCategoria = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,18 +28,18 @@ namespace ListaSpesa_BackEnd.Migrations
                 name: "Articoli",
                 columns: table => new
                 {
-                    IdArticolo = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdCategoria = table.Column<int>(type: "integer", nullable: false),
-                    NomeArticolo = table.Column<string>(type: "text", nullable: false),
-                    PrezzoNormale = table.Column<decimal>(type: "numeric(10,2)", nullable: false),
-                    DaComprareSiNo = table.Column<bool>(type: "boolean", nullable: false),
-                    Quantità = table.Column<int>(type: "integer", nullable: false),
-                    NomeNegozio = table.Column<string>(type: "text", nullable: true),
-                    PrezzoOfferta = table.Column<decimal>(type: "numeric(10,2)", nullable: true),
-                    DataScadenzaOfferta = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Priorita = table.Column<int>(type: "integer", nullable: false),
-                    UnitaMisura = table.Column<string>(type: "text", nullable: true)
+                    IdArticolo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCategoria = table.Column<int>(type: "int", nullable: false),
+                    NomeArticolo = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PrezzoNormale = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    DaComprareSiNo = table.Column<bool>(type: "bit", nullable: false),
+                    Quantità = table.Column<int>(type: "int", nullable: false),
+                    NomeNegozio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PrezzoOfferta = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
+                    DataScadenzaOfferta = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Priorita = table.Column<int>(type: "int", nullable: false),
+                    UnitaMisura = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,6 +56,12 @@ namespace ListaSpesa_BackEnd.Migrations
                 name: "IX_Articoli_IdCategoria",
                 table: "Articoli",
                 column: "IdCategoria");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articoli_NomeArticolo",
+                table: "Articoli",
+                column: "NomeArticolo",
+                unique: true);
         }
 
         /// <inheritdoc />

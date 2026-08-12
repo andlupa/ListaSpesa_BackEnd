@@ -26,7 +26,7 @@ public class Articolo
     [Column(TypeName = "decimal(10,2)")]
     public decimal? PrezzoOfferta { get; set; }
 
-    [Column(TypeName = "timestamp without time zone")]
+    [Column(TypeName = "datetime2")]
     public DateTime? DataScadenzaOfferta { get; set; }
 
     // NUOVI CAMPI
