@@ -16,8 +16,11 @@ WORKDIR /src
 # di sfruttare meglio la cache del restore NuGet.
 COPY *.csproj .
 
+# Pulisce tutte le cache NuGet
+RUN dotnet nuget locals all --clear
+
 # Ripristina tutti i pacchetti NuGet richiesti dal progetto.
-RUN dotnet restore
+RUN dotnet restore --force
 
 # Copia tutto il resto del codice sorgente nella cartella /src.
 COPY . .
