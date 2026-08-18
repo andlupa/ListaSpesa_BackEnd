@@ -1,7 +1,7 @@
 ﻿bin/
 obj/
-.vs/
-.git/
-.github/
+*.vs/
+*.git/
+*.github/
 *.user
 *.suo
