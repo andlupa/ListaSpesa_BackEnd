@@ -3,9 +3,7 @@ name: Deploy Listaspesa Backend
 on:
   push:
     branches: [master]
-    paths:
-      - 'ListaSpesa_BackEnd/**'
-      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -15,6 +13,7 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,7 +21,7 @@ jobs:
       - name: Install .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
         run: dotnet restore ListaSpesa_BackEnd.slnx
@@ -44,7 +43,7 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/listaspesa-backend:${{ github.sha }}
 
-      - name: Azure Login (OIDC)
+      - name: Azure Login (OIDIDC)
         uses: azure/login@v2
         with:
           client-id: ${{ vars.AZURE_CLIENT_ID }}
