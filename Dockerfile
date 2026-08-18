@@ -34,7 +34,6 @@ RUN dotnet publish \
 	-o /app/publish \
 	--no-restore
 
-
 # ------------------------------
 # SECONDA FASE: RUNTIME
 # ------------------------------
