@@ -19,6 +19,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore ListaSpesa_BackEnd.slnx
+
+      - name: Build
+        run: dotnet build ListaSpesa_BackEnd.slnx --no-restore
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
